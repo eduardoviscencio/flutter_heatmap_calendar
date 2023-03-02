@@ -225,7 +225,8 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             borderRadius: widget.borderRadius,
             onClick: widget.onClick,
           ),
-          if (widget.showColorTip == true)
+          if (widget.showColorTip == true) ...[
+            const SizedBox(height: 16),
             HeatMapColorTip(
               colorMode: widget.colorMode,
               colorsets: widget.colorsets,
@@ -234,6 +235,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
               containerCount: widget.colorTipCount,
               size: widget.colorTipSize,
             ),
+          ],
         ],
       ),
     );
