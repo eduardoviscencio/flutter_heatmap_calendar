@@ -125,15 +125,13 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
     setState(() {
       // Set _currentDate value to first day of initialized date or
       // today's month if widget.initDate is null.
-      _currentDate =
-          DateUtil.startDayOfMonth(widget.initDate ?? DateTime.now());
+      _currentDate = DateUtil.startDayOfMonth(widget.initDate ?? DateTime.now());
     });
   }
 
   void changeMonth(int direction) {
     setState(() {
-      _currentDate =
-          DateUtil.changeMonth(_currentDate ?? DateTime.now(), direction);
+      _currentDate = DateUtil.changeMonth(_currentDate ?? DateTime.now(), direction);
     });
     if (widget.onMonthChange != null) widget.onMonthChange!(_currentDate!);
   }
@@ -145,18 +143,17 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       children: <Widget>[
         // Previous month button.
         IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios,
             size: 14,
+            color: widget.textColor,
           ),
           onPressed: () => changeMonth(-1),
         ),
 
         // Text which shows the current year and month
         Text(
-          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
-              ' ' +
-              (_currentDate?.year).toString(),
+          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] + ' ' + (_currentDate?.year).toString(),
           style: TextStyle(
             fontSize: widget.monthFontSize ?? 12,
           ),
@@ -164,9 +161,10 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
 
         // Next month button.
         IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_forward_ios,
             size: 14,
+            color: widget.textColor,
           ),
           onPressed: () => changeMonth(1),
         ),
@@ -183,9 +181,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             widget.flexible ?? false,
             false,
             Container(
-              margin: EdgeInsets.only(
-                  left: widget.margin?.left ?? 2,
-                  right: widget.margin?.right ?? 2),
+              margin: EdgeInsets.only(left: widget.margin?.left ?? 2, right: widget.margin?.right ?? 2),
               width: widget.size ?? 42,
               alignment: Alignment.center,
               child: Text(

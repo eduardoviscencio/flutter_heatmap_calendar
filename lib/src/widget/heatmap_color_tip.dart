@@ -49,20 +49,15 @@ class HeatMapColorTip extends StatelessWidget {
   ///
   /// If [ColorMode.color], call [_heatmapListColor]
   /// If [ColorMode.opacity], call [_heatmapListOpacity]
-  List<Widget> _heatmapList() => colorMode == ColorMode.color
-      ? _heatmapListColor()
-      : _heatmapListOpacity();
+  List<Widget> _heatmapList() => colorMode == ColorMode.color ? _heatmapListColor() : _heatmapListOpacity();
 
   /// Evenly show every colors from lowest to highest.
   List<Widget> _heatmapListColor() {
     List<Widget> children = [];
-    SplayTreeMap sortedColorset =
-        SplayTreeMap.from(colorsets ?? {}, (a, b) => a > b ? 1 : -1);
+    SplayTreeMap sortedColorset = SplayTreeMap.from(colorsets ?? {}, (a, b) => a > b ? 1 : -1);
 
     for (int i = 0; i < (containerCount ?? _defaultLength); i++) {
-      children.add(_tipContainer(sortedColorset.values.elementAt(
-          (sortedColorset.length / (containerCount ?? _defaultLength) * i)
-              .floor())));
+      children.add(_tipContainer(sortedColorset.values.elementAt((sortedColorset.length / (containerCount ?? _defaultLength) * i).floor())));
     }
 
     return children;
@@ -73,9 +68,7 @@ class HeatMapColorTip extends StatelessWidget {
     List<Widget> children = [];
 
     for (int i = 0; i < (containerCount ?? _defaultLength); i++) {
-      children.add(_tipContainer(colorsets?.values.first
-              .withOpacity(i / (containerCount ?? _defaultLength)) ??
-          Colors.white));
+      children.add(_tipContainer(colorsets?.values.first.withOpacity(i / (containerCount ?? _defaultLength)) ?? Colors.white));
     }
     return children;
   }
@@ -83,7 +76,7 @@ class HeatMapColorTip extends StatelessWidget {
   /// Container which is colored by [color].
   Widget _tipContainer(Color color) {
     return Container(
-      color: HeatMapColor.defaultColor,
+      color: Colors.transparent,
       child: Container(
         width: size ?? 10,
         height: size ?? 10,
@@ -102,13 +95,23 @@ class HeatMapColorTip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(top: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           leftWidget ?? _defaultText('less'),
-          ..._heatmapList(),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: colorsets?.values.first ?? Colors.transparent,
+                width: .2,
+              ),
+            ),
+            child: Row(
+              children: _heatmapList(),
+            ),
+          ),
           rightWidget ?? _defaultText('more'),
         ],
       ),

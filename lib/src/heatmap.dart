@@ -131,22 +131,23 @@ class _HeatMap extends State<HeatMap> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Heatmap Widget.
-        _scrollableHeatMap(HeatMapPage(
-          endDate: widget.endDate ?? DateTime.now(),
-          startDate: widget.startDate ??
-              DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),
-          colorMode: widget.colorMode,
-          size: widget.size,
-          fontSize: widget.fontSize,
-          datasets: widget.datasets,
-          defaultColor: widget.defaultColor,
-          textColor: widget.textColor,
-          colorsets: widget.colorsets,
-          borderRadius: widget.borderRadius,
-          onClick: widget.onClick,
-          margin: widget.margin,
-          showText: widget.showText,
-        )),
+        _scrollableHeatMap(
+          HeatMapPage(
+            endDate: widget.endDate ?? DateTime.now(),
+            startDate: widget.startDate ?? DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),
+            colorMode: widget.colorMode,
+            size: widget.size,
+            fontSize: widget.fontSize,
+            datasets: widget.datasets,
+            defaultColor: widget.defaultColor,
+            textColor: widget.textColor,
+            colorsets: widget.colorsets,
+            borderRadius: widget.borderRadius,
+            onClick: widget.onClick,
+            margin: widget.margin,
+            showText: widget.showText,
+          ),
+        ),
 
         // Show HeatMapColorTip if showColorTip is true.
         if (widget.showColorTip == true)
